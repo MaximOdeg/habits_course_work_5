@@ -13,21 +13,22 @@ services:
     image: redis:latest
     restart: on-failure
     ports:
-    - "6379:6379"
+    - "6379"
 
   db:
     image: postgres:16-alpine
     restart: on-failure
     env_file:
-    - .env
+      - .env
     expose:
-    - "5432"
+      - "5432"
     volumes:
-    - /pg_data:/var/lib/postgresql/data
+      - /pg_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U $POSTGRES_USER"]
+      test: ["CMD-SHELL", "-c", "pg_isready -U $POSTGRES_USER"]
       interval: 10s
       retries: 5
+      timeout: 5s
 
   app:
     build: .
@@ -60,16 +61,16 @@ services:
   celery-beat:
     build: .
     tty: true
-    command: celery -A config beat --loglevel=info
+    command: celery -A config beat -l INFO
     restart: on-failure
     volumes:
-    - .:/app
+      - .:/app
     depends_on:
-    - redis
-    - db
-    - app
+      - redis
+      - db
+      - app
     env_file:
-    - .env
+      - .env
 
 volumes:
   pg_data:

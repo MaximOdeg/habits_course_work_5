@@ -19,15 +19,15 @@ jobs:
       - name: Run Flake8
         run: flake8 .
 
-      - name: Set up PostgreSQL
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y postgresql-client
-          sudo service postgresql start
-          sudo -u postgres psql -c "ALTER USER postgres PASSWORD '569103Max';"
-          sudo -u postgres psql -c "CREATE DATABASE habits;"
-          sudo -u postgres psql -c "CREATE USER your_user WITH PASSWORD '569103Max';"
-          sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE habits TO postgres;"
+#      - name: Set up PostgreSQL
+#        run: |
+#          sudo apt-get update
+#          sudo apt-get install -y postgresql-client
+#          sudo service postgresql start
+#          sudo -u postgres psql -c "ALTER USER postgres PASSWORD '569103Max';"
+#          sudo -u postgres psql -c "CREATE DATABASE habits;"
+#          sudo -u postgres psql -c "CREATE USER your_user WITH PASSWORD '569103Max';"
+#          sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE habits TO postgres;"
 
   test:
     needs: lint

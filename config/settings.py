@@ -156,11 +156,3 @@ SERVER_EMAIL = EMAIL_HOST_USER
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 TELEGRAM_BOT_ID = os.getenv("TELEGRAM_BOT_ID")
-
-if "test" in sys.argv:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / "test_db_sqlite3",
-        }
-    }

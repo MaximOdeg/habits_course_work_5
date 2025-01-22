@@ -76,7 +76,7 @@ jobs:
       - name: Set up SSH
         run: |
           sudo apt-get install -y sshpass
-          echo "${{ secrets.SSH_PASSWORD }}" > password.txt
+          echo "${{ secrets.SSH_KEY }}" > password.txt
           chmod 600 password.txt
 
       - name: Add SSH host key
